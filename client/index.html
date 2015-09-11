@@ -10,16 +10,33 @@
 
     <!-- Display search criteria -->
     <div ng-controller="RepsController as reps">
-      <h1>Find your representative!</h1>
-      <label>Search by Zip:
+      <!-- ZIP -->
+      <label>
+        Search By Zip
         <input ng-model="reps.search.zip" />
-        <button type="button" ng-click="reps.search.zip">Search</button>
+        <button type="button" ng-click="reps.searchByZip(reps.search.zip)">Search</button> <!-- On click, run our function passing it the input that was declared above -->
       </label>
-
-      <!-- Display Reps -->
+      <!-- NAME -->
+      <label>
+        Search By Name
+        <input ng-model="reps.search.name" />
+        <button type="button" ng-click="reps.searchByName(reps.search.name)">Search</button> <!-- On click, run our function passing it the input that was declared above -->
+      </label>
+      <!-- STATE -->
+      <label>
+        Search By State
+        <input ng-model="reps.search.state" />
+        <button type="button" ng-click="reps.searchByState(reps.search.state)">Search</button> <!-- On click, run our function passing it the input that was declared above -->
+      </label>
+      
+      <!-- This is going to be the display the list of congress members -->
       <ul>
-        <li ng-repeat="member in reps.members">{{member.name}}</li>
+        <li ng-repeat="member in reps.members"><!-- Loop through our members objects and display the name -->
+          <span>Name: {{member.name}}</span>
+          <span>State: {{member.state}}</span>
+        </li>
       </ul>
+
     </div>
 
     <!-- TODO You need to put your script tags here -->
