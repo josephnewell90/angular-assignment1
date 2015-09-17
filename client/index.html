@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html ng-app="RepsApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Find your representative</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-  </head>
-  <body>
-    <div ng-controller="MainCtrl as main">
-      <form ng-submit="main.searchByZip(main.inputs.zip)">
-        <label>
-          Zip Code: <input type="string" ng-model="main.inputs.zip"/>
-        </label>
-        <button type="submit">Submit</button>
-      </form>
 
-      <ul>
-        <li ng-repeat="rep in main.reps">
-          {{rep.name}} ({{rep.state}})
-        </li>
-      </ul>
+<head>
+  <meta charset="utf-8">
+  <title>Find your representative</title>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <style>
+    body {
+      padding-top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand">Search your Reps</a>
+      </div>
     </div>
+  </nav>
 
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/js/app.js"></script>
-  </body>
+  <div ng-controller="MainCtrl as main" class="container">
+
+    <form ng-submit="main.searchByZip(main.inputs.zip)" class="form-inline">
+
+      <div class="form-group">
+        <label for="zipcode">Zip Code:</label>
+        <input id="zipcode" class="form-control" type="string" ng-model="main.inputs.zip" />
+      </div>
+
+      <button class="btn btn-info" type="submit">Submit</button>
+    </form>
+
+    <form ng-submit="main.searchRepsByName(main.inputs.repsLastName)" class="form-inline">
+
+      <div class="form-group">
+        <label for="rep-last-name">Rep Last Name:</label>
+        <input id="rep-last-name" class="form-control" type="string" ng-model="main.inputs.repsLastName" />
+      </div>
+
+      <button class="btn btn-info" type="submit">Submit</button>
+    </form>
+
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="rep in main.reps">
+        <h4 class="list-group-item-heading">{{rep.name}}</h4>
+        <p>State: {{rep.state}}</p>
+      </li>
+    </ul>
+  </div>
+
+  <script src="/bower_components/angular/angular.min.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+
 </html>
+
+
+
+
+
+
+

@@ -4,17 +4,62 @@ angular.module('RepsApp', [
 ]);
 
 angular
-  .module('RepsAppControllers', [])
-  .controller('MainCtrl', function ($http) {
+  .module('RepsAppControllers', [
+    'repsService'
+  ])
+  .controller('MainCtrl', function (reps) {
     var main = this;
     main.reps = [];
 
     main.searchByZip = function (zip) {
-      $http
-        .get('http://dgm-representatives.herokuapp.com/all/by-zip/' + zip)
-        .then(function (response) {
-          main.reps = response.data;
-        });
+      reps.allByZip(zip).then(function (data) {
+        main.reps = data;
+      });
+    };
+
+    main.searchRepsByName = function (name) {
+      reps.repsByName(name).then(function (data) {
+        main.reps = data;
+      });
     };
   });
+
+angular
+  .module('repsService', [])
+  .factory('reps', function ($http) {
+    var host = 'http://dgm-representatives.herokuapp.com';
+    return {
+      allByZip: function (zip) {
+        return $http
+          .get(host + '/all/by-zip/' + zip)
+          .then(function (response) {
+            return response.data;
+          });
+      },
+      repsByName: function (name) {
+        return $http
+          .get(host + '/reps/by-name/' + name)
+          .then(function (response) {
+            return response.data;
+          });
+      }
+    };
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
