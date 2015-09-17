@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Find your representative</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <style>
       body
       {
@@ -25,7 +25,7 @@
     <div ng-controller="MainCtrl as main" class="container">
 
       <!-- Display search criteria -->
-        <h1>Find your representative!</h1>
+        <h1>Find your representative or senator by zip code!</h1>
         <form ng-submit="main.searchByZip(main.inputs.zip)" class="form-inline">
 
           <div class="form-group">
@@ -36,6 +36,8 @@
           <button type="submit" class="btn btn-info">Submit</button>
 
         </form>
+
+        <h1>Search for Representatives</h1>
 
         <form ng-submit="main.searchRepsByName(main.inputs.repsLastName)" class="form-inline">
 
@@ -48,11 +50,46 @@
 
         </form>
 
+        <form ng-submit="main.searchRepsByState(main.inputs.repsState)" class="form-inline">
+
+          <div class="form-group">
+            <label for="rep-state">State:</label>
+            <input id="rep-state" class="form-control" type="string" ng-model="main.inputs.repsState" />
+          </div>
+
+          <button type="submit" class="btn btn-info">Submit</button>
+
+        </form>
+
+        <h1>Search for Senators</h1>
+
+        <form ng-submit="main.searchSenatorsByName(main.inputs.sensLastName)" class="form-inline">
+
+          <div class="form-group">
+            <label for="sen-last-name">Senator's Last Name:</label>
+            <input id="sen-last-name" class="form-control" type="string" ng-model="main.inputs.sensLastName" />
+          </div>
+
+          <button type="submit" class="btn btn-info">Submit</button>
+
+        </form>
+
+        <form ng-submit="main.searchSenatorsByState(main.inputs.sensState)" class="form-inline">
+
+          <div class="form-group">
+            <label for="sen-state">State:</label>
+            <input id="sen-state" class="form-control" type="string" ng-model="main.inputs.sensState" />
+          </div>
+
+          <button type="submit" class="btn btn-info">Submit</button>
+
+        </form>
+
         <!-- Display Reps -->
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="rep in main.reps">
-            <h4 class="list-group-item-heading">{{rep.name}}</h4>
-            <p class="list-group-item-text">{{rep.state}}</p>
+          <li class="list-group-item" ng-repeat="person in main.results">
+            <h4 class="list-group-item-heading">{{person.name}}</h4>
+            <p class="list-group-item-text">{{person.state}}</p>
           </li>
         </ul>
     </div>
