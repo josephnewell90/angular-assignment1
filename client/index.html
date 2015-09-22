@@ -23,24 +23,69 @@
 
   <div ng-controller="MainCtrl as main" class="container">
 
+    <!-- Search by Zip -->
     <form ng-submit="main.searchByZip(main.inputs.zip)" class="form-inline">
-
-      <div class="form-group">
-        <label for="zipcode">Zip Code:</label>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <label for="zipcode">Zip Code:</label>
+        </span>
         <input id="zipcode" class="form-control" type="string" ng-model="main.inputs.zip" />
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="submit">Search</button>
+        </span>
       </div>
-
-      <button class="btn btn-info" type="submit">Submit</button>
     </form>
 
+    <!-- Search by Rep Last Name -->
     <form ng-submit="main.searchRepsByName(main.inputs.repsLastName)" class="form-inline">
-
-      <div class="form-group">
-        <label for="rep-last-name">Rep Last Name:</label>
-        <input id="rep-last-name" class="form-control" type="string" ng-model="main.inputs.repsLastName" />
+      <div class="input-group">
+        <span class="input-group-addon">
+          <label for="reps-last-name">Reps Name:</label>
+        </span>
+        <input id="reps-last-name" class="form-control" type="string" ng-model="main.inputs.repsLastName" />
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="submit">Search</button>
+        </span>
       </div>
+    </form>
 
-      <button class="btn btn-info" type="submit">Submit</button>
+    <!-- Search by Rep State-->
+    <form ng-submit="main.searchRepsByState(main.inputs.repsState)" class="form-inline">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <label for="reps-state">Reps State:</label>
+        </span>
+        <input id="reps-state" class="form-control" type="string" ng-model="main.inputs.repsState" />
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="submit">Search</button>
+        </span>
+      </div>
+    </form>
+
+    <!-- Search by Sens Last Name -->
+    <form ng-submit="main.searchSensByName(main.inputs.sensLastName)" class="form-inline">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <label for="sens-last-name">Senator Name:</label>
+        </span>
+        <input id="sens-last-name" class="form-control" type="string" ng-model="main.inputs.sensLastName" />
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="submit">Search</button>
+        </span>
+      </div>
+    </form>
+
+    <!-- Search by Sens State-->
+    <form ng-submit="main.searchSensByState(main.inputs.sensState)" class="form-inline">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <label for="sens-state">Senator State:</label>
+        </span>
+        <input id="sens-state" class="form-control" type="string" ng-model="main.inputs.sensState" />
+        <span class="input-group-btn">
+          <button class="btn btn-info" type="submit">Search</button>
+        </span>
+      </div>
     </form>
 
     <ul class="list-group">
