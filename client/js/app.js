@@ -41,38 +41,6 @@ angular
 
     main.criteria = main.apis[0];
 
-    /*
-    main.searchByZip = function (zip) {
-      reps.allByZip(zip).then(function (data) {
-        main.results = data;
-      });
-    };
-
-    main.searchRepsByName = function (name) {
-      reps.repsByName(name).then(function (data) {
-        main.results = data;
-      });
-    };
-
-    main.searchRepsByState = function (state) {
-      reps.repsByState(state).then(function (data) {
-        main.results = data;
-      });
-    };
-
-    main.searchSenatorsByName = function (name) {
-      reps.sensByName(name).then(function (data) {
-        main.results = data;
-      });
-    };
-
-    main.searchSenatorsByState = function (state) {
-      reps.sensByState(state).then(function (data) {
-        main.results = data;
-      });
-    };
-    */
-
   });
 
 angular

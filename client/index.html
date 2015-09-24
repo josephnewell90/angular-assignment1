@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Find your representative</title>
-    <!-- TODO You need to put your style imports here -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
     <style>
       body
@@ -50,30 +49,6 @@
         <button type="submit" class="btn btn-info" ng-click="main.criteria.method(main.input)">Submit</button>
       </form>
 
-      <!-- Display search criteria
-        <h1>Find your representative!</h1>
-        <form ng-submit="main.searchByZip(main.inputs.zip)" class="form-inline">
-
-          <div class="form-group">
-            <label for="zipcode">Zip Code:</label>
-            <input id="zipcode" class="form-control" type="string" ng-model="main.inputs.zip" />
-          </div>
-
-          <button type="submit" class="btn btn-info">Submit</button>
-
-        </form>
-
-        <form ng-submit="main.searchRepsByName(main.inputs.repsLastName)" class="form-inline">
-
-          <div class="form-group">
-            <label for="rep-ast-name">Representative's Last Name:</label>
-            <input id="rep-ast-name" class="form-control" type="string" ng-model="main.inputs.repsLastName" />
-          </div>
-
-          <button type="submit" class="btn btn-info">Submit</button>
-
-        </form> -->
-
         <!-- Display Reps -->
         <ul class="list-group">
           <li href="#" class="list-group-item" ng-repeat="rep in main.reps">
@@ -83,7 +58,6 @@
         </ul>
     </div>
 
-    <!-- TODO You need to put your script tags here -->
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/js/app.js"></script>
   </body>
