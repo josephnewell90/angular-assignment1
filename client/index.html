@@ -23,6 +23,19 @@
 
   <div ng-controller="MainCtrl as main" class="container">
 
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="main.congressType" value="reps" />
+        Representatives
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="main.congressType" value="sens" />
+        Senators
+      </label>
+    </div>
+
     <!-- Search by Zip -->
     <form ng-submit="main.searchByZip(main.inputs.zip)" class="form-inline">
       <div class="input-group">

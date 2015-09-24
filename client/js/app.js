@@ -46,34 +46,28 @@ angular
   .module('repsService', [])
   .factory('reps', function ($http) {
     var host = 'http://dgm-representatives.herokuapp.com';
-    function returnData(response) { return response.data; }
-    return {
-      allByZip: function (zip) {
-        return $http
-          .get(host + '/all/by-zip/' + zip)
-          .then(returnData);
-      },
-      repsByName: function (name) {
-        return $http
-          .get(host + '/reps/by-name/' + name)
-          .then(returnData);
-      },
-      repsByState: function (state) {
-        return $http
-          .get(host + '/reps/by-state/' + state)
-          .then(returnData);
-      },
-      sensByName: function (name) {
-        return $http
-          .get(host + '/sens/by-name/' + name)
-          .then(returnData);
-      },
-      sensByState: function (state) {
-        return $http
-          .get(host + '/sens/by-state/' + state)
-          .then(returnData);
-      }
-    };
+
+    /**
+     * @function search
+     * @param {String} type - can be "all", "reps", "sens"
+     * @param {String} criteria - can by "zip", "name", "state"
+     * @param {String} query - can any string
+     */
+    function search(type, criteria, query) {
+      return $http
+        .get(host + '/' + type + '/by-' + criteria + '/' + query)
+        .then(function (response) {
+          return response.data;
+        });
+    }
+
+    search.allByZip    = search.bind(null, 'all', 'zip');
+    search.repsByName  = search.bind(null, 'reps', 'name');
+    search.repsByState = search.bind(null, 'reps', 'state');
+    search.sensByName  = search.bind(null, 'sens', 'name');
+    search.sensByState = search.bind(null, 'sens', 'state');
+
+    return search;
   });
 
 
