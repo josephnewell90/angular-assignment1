@@ -9,7 +9,39 @@ angular
   ])
   .controller ('MainCtrl', function (reps) {
     var main = this; //Get the reps
+    main.reps = [];
+    main.congressType = 'reps';
 
+    main.apis = [
+      {
+        label: 'Zip',
+        method: function (zip) {
+          reps('all', 'zip', zip).then(function (data) {
+            main.reps = data;
+          });
+        }
+      },
+      {
+        label: 'Last Name',
+        method: function (name, congressType) {
+          reps(main.congressType, 'name', name).then(function (data) {
+            main.reps = data;
+          });
+        }
+      },
+      {
+        label: 'State',
+        method: function (state) {
+          reps(main.congressType, 'state', state).then(function (data) {
+            main.reps = data;
+          });
+        }
+      }
+    ];
+
+    main.criteria = main.apis[0];
+
+    /*
     main.searchByZip = function (zip) {
       reps.allByZip(zip).then(function (data) {
         main.results = data;
@@ -39,6 +71,7 @@ angular
         main.results = data;
       });
     };
+    */
 
   });
 

@@ -42,15 +42,15 @@
 
       <h2>Search by:</h2>
 
-      <select class="form-control">
-        <option>Zip</option>
-        <option>Last name</option>
-        <option>State</option>
-      </select>
+      <form class="form-inline">
+        <select class="form-control" ng-model="main.criteria" ng-options="item as item.label for item in main.apis">
 
-      {{main.congressType}}
+        </select>
+        <input class="form-control" ng-model="main.input" type="text" />
+        <button type="submit" class="btn btn-info" ng-click="main.criteria.method(main.input)">Submit</button>
+      </form>
 
-      <!-- Display search criteria -->
+      <!-- Display search criteria
         <h1>Find your representative!</h1>
         <form ng-submit="main.searchByZip(main.inputs.zip)" class="form-inline">
 
@@ -72,7 +72,7 @@
 
           <button type="submit" class="btn btn-info">Submit</button>
 
-        </form>
+        </form> -->
 
         <!-- Display Reps -->
         <ul class="list-group">
