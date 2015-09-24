@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Find your representative</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- TODO You need to put your style imports here -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
     <style>
       body
       {
@@ -24,8 +25,33 @@
 
     <div ng-controller="MainCtrl as main" class="container">
 
+      <h2>Search for:</h2>
+
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="main.congressType" value="reps">
+          Representative
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" ng-model="main.congressType" value="sens">
+          Senator
+        </label>
+      </div>
+
+      <h2>Search by:</h2>
+
+      <select class="form-control">
+        <option>Zip</option>
+        <option>Last name</option>
+        <option>State</option>
+      </select>
+
+      {{main.congressType}}
+
       <!-- Display search criteria -->
-        <h1>Find your representative or senator by zip code!</h1>
+        <h1>Find your representative!</h1>
         <form ng-submit="main.searchByZip(main.inputs.zip)" class="form-inline">
 
           <div class="form-group">
@@ -37,48 +63,11 @@
 
         </form>
 
-        <h1>Search for Representatives</h1>
-
         <form ng-submit="main.searchRepsByName(main.inputs.repsLastName)" class="form-inline">
 
           <div class="form-group">
-            <label for="rep-last-name">Representative's Last Name:</label>
-            <input id="rep-last-name" class="form-control" type="string" ng-model="main.inputs.repsLastName" />
-          </div>
-
-          <button type="submit" class="btn btn-info">Submit</button>
-
-        </form>
-
-        <form ng-submit="main.searchRepsByState(main.inputs.repsState)" class="form-inline">
-
-          <div class="form-group">
-            <label for="rep-state">State:</label>
-            <input id="rep-state" class="form-control" type="string" ng-model="main.inputs.repsState" />
-          </div>
-
-          <button type="submit" class="btn btn-info">Submit</button>
-
-        </form>
-
-        <h1>Search for Senators</h1>
-
-        <form ng-submit="main.searchSenatorsByName(main.inputs.sensLastName)" class="form-inline">
-
-          <div class="form-group">
-            <label for="sen-last-name">Senator's Last Name:</label>
-            <input id="sen-last-name" class="form-control" type="string" ng-model="main.inputs.sensLastName" />
-          </div>
-
-          <button type="submit" class="btn btn-info">Submit</button>
-
-        </form>
-
-        <form ng-submit="main.searchSenatorsByState(main.inputs.sensState)" class="form-inline">
-
-          <div class="form-group">
-            <label for="sen-state">State:</label>
-            <input id="sen-state" class="form-control" type="string" ng-model="main.inputs.sensState" />
+            <label for="rep-ast-name">Representative's Last Name:</label>
+            <input id="rep-ast-name" class="form-control" type="string" ng-model="main.inputs.repsLastName" />
           </div>
 
           <button type="submit" class="btn btn-info">Submit</button>
@@ -87,13 +76,14 @@
 
         <!-- Display Reps -->
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="person in main.results">
-            <h4 class="list-group-item-heading">{{person.name}}</h4>
-            <p class="list-group-item-text">{{person.state}}</p>
+          <li href="#" class="list-group-item" ng-repeat="rep in main.reps">
+            <h4 class="list-group-item-heading">{{rep.name}}</h4>
+            <p class="list-group-item-text">{{rep.state}}</p>
           </li>
         </ul>
     </div>
 
+    <!-- TODO You need to put your script tags here -->
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/js/app.js"></script>
   </body>
