@@ -16,7 +16,7 @@ angular
       {
         label: 'Zip',
         method: function (zip) {
-          reps('all', 'zip', zip).then(function (data) {
+          reps('all', 'zip', zip).then(function (data) { //.then handles the Promise of the previous call, making things asynchronous and much easier to read
             main.reps = data;
           });
         }
