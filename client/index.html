@@ -1,64 +1,68 @@
 <!DOCTYPE html>
 <html ng-app="RepsApp">
-  <head>
-    <meta charset="utf-8">
-    <title>Find your representative</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" >
-    <style>
-      body
-      {
-        padding-top: 70px;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Begin nav -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Search By Representative</a>
-          <a class="navbar-brand" href="/">Search By Senator</a>
-        </div>
+
+<head>
+  <meta charset="utf-8">
+  <title>Find your representative</title>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 70px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Begin nav -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Search By Representative</a>
+        <a class="navbar-brand" href="/">Search By Senator</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <div ng-controller="MainCtrl as main" class="container">
+  <div ng-controller="MainCtrl as main" class="container">
 
-      <h2>Search for:</h2>
+    <h2>Search for:</h2>
 
-      <div class="radio">
-        <label>
-          <input type="radio" ng-model="main.congressType" value="reps">
-          Representative
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" ng-model="main.congressType" value="sens">
-          Senator
-        </label>
-      </div>
-
-      <h2>Search by:</h2>
-
-      <form class="form-inline">
-        <select class="form-control" ng-model="main.criteria" ng-options="item as item.label for item in main.apis">
-
-        </select>
-        <input class="form-control" ng-model="main.input" type="text" />
-        <button type="submit" class="btn btn-info" ng-click="main.criteria.method(main.input)">Submit</button>
-      </form>
-
-        <!-- Display Reps -->
-        <ul class="list-group">
-          <li href="#" class="list-group-item" ng-repeat="rep in main.reps">
-            <h4 class="list-group-item-heading">{{rep.name}}</h4>
-            <p class="list-group-item-text">{{rep.state}}</p>
-          </li>
-        </ul>
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="main.congressType" ng-change="main.input = ''" value="reps"> Representative
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" ng-model="main.congressType" ng-change="main.input = ''" value="sens"> Senator
+      </label>
     </div>
 
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/js/app.js"></script>
-  </body>
+    <h2>Search by:</h2>
+
+    <form class="form-inline">
+      <select class="form-control" ng-model="main.criteria" ng-options="item as item.label for item in main.apis" ng-change="main.input = ''">
+
+      </select>
+      <input class="form-control" ng-model="main.input" ng-disabled="main.loading" type="text" autofocus/>
+      <button type="submit" class="btn btn-info" ng-click="main.criteria.method(main.input)" ng-disabled="main.loading || !main.input">Submit</button>
+    </form>
+
+
+    <!-- Display Reps -->
+    <ul class="list-group">
+      <li class="list-group-item" ng-show="main.loading">Loading...</li>
+      <li class="list-group-item" ng-show="main.reps.length === 0 && !main.loading && main.searched">No results found for <span ng-if="main.congressType == 'reps'">Representatives</span> <span ng-if="main.congressType == 'sens'">Senators</span> with the {{main.criteria.label}} of {{main.input}}</li>
+
+      <li href="#" class="list-group-item" ng-repeat="rep in main.reps">
+        <h4 class="list-group-item-heading">{{rep.name}}</h4>
+        <p class="list-group-item-text">{{rep.state}}</p>
+      </li>
+    </ul>
+  </div>
+
+  <script src="/bower_components/angular/angular.min.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+
 </html>

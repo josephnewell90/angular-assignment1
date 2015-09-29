@@ -12,28 +12,40 @@ angular
     main.reps = [];
     main.congressType = 'reps';
 
+    main.loading = false;
+    main.searched = false;
+
     main.apis = [
       {
         label: 'Zip',
         method: function (zip) {
+          main.loading = true;
           reps('all', 'zip', zip).then(function (data) { //.then handles the Promise of the previous call, making things asynchronous and much easier to read
+            main.loading = false;
             main.reps = data;
+            main.searched = true;
           });
         }
       },
       {
         label: 'Last Name',
         method: function (name, congressType) {
+          main.loading = true;
           reps(main.congressType, 'name', name).then(function (data) {
             main.reps = data;
+            main.loading = false;
+            main.searched = true;
           });
         }
       },
       {
         label: 'State',
         method: function (state) {
+          main.loading = true;
           reps(main.congressType, 'state', state).then(function (data) {
             main.reps = data;
+            main.loading = false;
+            main.searched = false;
           });
         }
       }
@@ -61,12 +73,6 @@ angular
           return response.data;
         });
     }
-
-    search.allByZip = search.bind(null, 'all', 'zip');
-    search.repsByName = search.bind(null, 'reps', 'name');
-    search.repsByState = search.bind(null, 'reps', 'state');
-    search.sensByName = search.bind(null, 'sens', 'name');
-    search.sensByState = search.bind(null, 'sens', 'state');
 
     return search;
   });
