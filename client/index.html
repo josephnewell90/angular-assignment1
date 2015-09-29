@@ -40,26 +40,37 @@
       <select
         class="form-control"
         ng-model="main.criteria"
-        ng-options="item as item.label for item in main.apis">
+        ng-options="item as item.label for item in main.apis"
+        ng-change="main.input = ''">
       </select>
       <input
         class="form-control"
         type="text"
-        ng-model="main.input" />
+        ng-model="main.input"
+        ng-disabled="main.loading"
+        autofocus/>
       <button
         class="btn btn-info"
         ng-click="main.criteria.method(main.input)"
+        ng-disabled="main.loading || !main.input"
         type="submit">
         Submit
       </button>
     </form>
 
     <ul class="list-group">
-      <li class="list-group-item" ng-repeat="rep in main.reps">
+      <li class="list-group-item" ng-show="main.loading">
+        Loading...
+      </li>
+      <li class="list-group-item" ng-show="main.reps.length === 0 && !main.loading">
+        No Results
+      </li>
+      <li ng-hide="main.loading" class="list-group-item" ng-repeat="rep in main.reps">
         <h4 class="list-group-item-heading">{{rep.name}}</h4>
         <p>State: {{rep.state}}</p>
       </li>
     </ul>
+
   </div>
 
   <script src="/bower_components/angular/angular.min.js"></script>
