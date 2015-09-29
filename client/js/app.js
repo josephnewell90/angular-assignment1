@@ -10,36 +10,36 @@ angular
   .controller('MainCtrl', function (reps) {
     var main = this;
     main.reps = [];
+    main.congressType = 'reps';
 
-    main.searchByZip = function (zip) {
-      reps.allByZip(zip).then(function (data) {
-        main.reps = data;
-      });
-    };
+    main.apis = [
+      {
+        label: 'Zip',
+        method: function (zip) {
+          reps('all', 'zip', zip).then(function (data) {
+            main.reps = data;
+          });
+        }
+      },
+      {
+        label: 'Last Name',
+        method: function (name) {
+          reps(main.congressType, 'name', name).then(function (data) {
+            main.reps = data;
+          });
+        }
+      },
+      {
+        label: 'State',
+        method: function (state) {
+          reps(main.congressType, 'state', state).then(function (data) {
+            main.reps = data;
+          });
+        }
+      }
+    ];
 
-    main.searchRepsByName = function (name) {
-      reps.repsByName(name).then(function (data) {
-        main.reps = data;
-      });
-    };
-
-    main.searchRepsByState = function (state) {
-      reps.repsByState(state).then(function (data) {
-        main.reps = data;
-      });
-    };
-
-    main.searchSensByName = function (name) {
-      reps.sensByName(name).then(function (data) {
-        main.reps = data;
-      });
-    };
-
-    main.searchSensByState = function (state) {
-      reps.sensByState(state).then(function (data) {
-        main.reps = data;
-      });
-    };
+    main.criteria = main.apis[0];
   });
 
 angular
@@ -53,21 +53,13 @@ angular
      * @param {String} criteria - can by "zip", "name", "state"
      * @param {String} query - can any string
      */
-    function search(type, criteria, query) {
+    return function search(type, criteria, query) {
       return $http
         .get(host + '/' + type + '/by-' + criteria + '/' + query)
         .then(function (response) {
           return response.data;
         });
     }
-
-    search.allByZip    = search.bind(null, 'all', 'zip');
-    search.repsByName  = search.bind(null, 'reps', 'name');
-    search.repsByState = search.bind(null, 'reps', 'state');
-    search.sensByName  = search.bind(null, 'sens', 'name');
-    search.sensByState = search.bind(null, 'sens', 'state');
-
-    return search;
   });
 
 
